@@ -35,10 +35,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final read = gql("""query{
-  continents{
+  final read = gql("""query read{
+  countries{
     name
-    code
   }
 }""");
 
@@ -67,9 +66,11 @@ class _HomePageState extends State<HomePage> {
 
                   return ListView.builder(
                     itemBuilder: (BuildContext context, int index) {
-                      return const Text("Data");
+                      return ListTile(
+                          title:
+                              Text(result.data!['countries'][index]['name']));
                     },
-                    itemCount: result.data!['continents'].length,
+                    itemCount: result.data!['countries'].length,
                   );
                 })));
   }
